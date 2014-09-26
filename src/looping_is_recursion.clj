@@ -56,5 +56,9 @@
      :else (recur fibn (+ fibn fibn-1) (dec i)))))
 
 (defn cut-at-repetition [a-seq]
-  [":("])
-
+  (loop [acc 0
+         s1 []
+         s2 a-seq]
+    (if (= (count (set a-seq)) acc)
+      s1
+      (recur (inc acc) (conj s1 (first s2)) (rest s2)))))
